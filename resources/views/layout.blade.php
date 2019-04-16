@@ -13,7 +13,7 @@
   <div id="app">
     <ul>
         <li><a href="/">Home</a></li>
-        <li><a href="/blog">My Blog</a></li>
+        <li><a href="/blog-home">My Blog</a></li>
         <li><a href="/projects">My Projects</a></li>
     </ul>
   @yield('content')

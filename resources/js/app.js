@@ -25,6 +25,10 @@ Vue.use(VueAxios, axios);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('home-component', require('./components/HomeComponent.vue').default);
+Vue.component('create-component', require('./components/CreateComponent.vue').default);
+Vue.component('edit-component', require('./components/EditComponent.vue').default);
+Vue.component('index-component', require('./components/IndexComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

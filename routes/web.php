@@ -15,6 +15,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/blog', function () {
-    return view('blog');
+Route::get('/blog-home', function () {
+    return view('blog-home');
+});
+
+Route::get('/blog-create', function () {
+    return view('blog-create');
+});
+
+Route::get('/blog-edit', function () {
+    return view('blog-edit');
+});
+
+Route::get('/blog-index', function () {
+    return view('blog-index');
 });

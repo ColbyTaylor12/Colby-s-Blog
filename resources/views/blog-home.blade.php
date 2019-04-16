@@ -1,7 +1,7 @@
 @extends('layout')
 
-@section('title', 'Tic Tac Toe')
+@section('title', 'Blog Home')
 
 @section('content')
-<tictactoegrid></tictactoegrid>
+<home-component></home-component>
 @endsection
