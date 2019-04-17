@@ -30,19 +30,20 @@
 
       data() {
         return {
-          blogpost: {}
+          blogpost: {},
+          api: "http://localhost:8888/blog-home/api/",
         }
       },
       created() {
-        let uri = `http://vuelaravelcrud.test/api/blogpost/edit/${this.$route.params.id}`;
+        let uri = this.api + "edit/${this.$route.params.id}";
         this.axios.get(uri).then((response) => {
             this.blogpost = response.data;
         });
       },
       methods: {
         updatePost() {
-          let uri = `http://vuelaravelcrud.test/api/blogpost/update/${this.$route.params.id}`;
-          this.axios.blogpost(uri, this.blogpost).then((response) => {
+          let uri = this.api + "update/${this.$route.params.id}";
+          this.axios.post(uri, this.blogpost).then((response) => {
             this.$router.push({name: 'blogposts'});
           });
         }

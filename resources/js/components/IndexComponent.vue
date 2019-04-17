@@ -12,9 +12,8 @@
             <thead>
             <tr>
                 <th>ID</th>
-                <th>Item Name</th>
-                <th>Item Price</th>
-                <th>Actions</th>
+                <th>Blog Title</th>
+                <th>Blog Body</th>
             </tr>
             </thead>
             <tbody>
@@ -34,11 +33,12 @@
   export default {
       data() {
         return {
-          blogposts: []
+          blogposts: [],
+          api: "http://localhost:8888/blog-home/api/",
         }
       },
       created() {
-      let uri = 'http://vuelaravelcrud.test/api/blogposts';
+      let uri = this.api + "blogposts";
       this.axios.get(uri).then(response => {
         this.blogposts = response.data.data;
       });
@@ -46,7 +46,7 @@
     methods: {
       deleteBlogPost(id)
       {
-        let uri = `http://vuelaravelcrud.test/api/blogpost/delete/${id}`;
+        let uri = this.api + "delete/${id}";
         this.axios.delete(uri).then(response => {
           this.blogposts.splice(this.blogposts.indexOf(id), 1);
         });

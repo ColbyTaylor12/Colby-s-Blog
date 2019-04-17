@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\BlogPost;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class BlogPostCollection extends ResourceCollection

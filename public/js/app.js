@@ -1790,20 +1790,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      blogpost: {}
+      blogpost: {},
+      api: "http://localhost:8888/blog-home/api/"
     };
   },
   methods: {
     addBlogPost: function addBlogPost() {
       var _this = this;
 
-      var uri = 'http://vuelaravelcrud.test/api/blogpost/create';
+      var uri = this.api + "create";
       this.axios.post(uri, this.blogpost).then(function (response) {
         _this.$router.push({
-          name: 'blogposts'
+          name: "blogposts"
         });
       });
     }
@@ -1851,13 +1853,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      blogpost: {}
+      blogpost: {},
+      api: "http://localhost:8888/blog-home/api/"
     };
   },
   created: function created() {
     var _this = this;
 
-    var uri = "http://vuelaravelcrud.test/api/blogpost/edit/".concat(this.$route.params.id);
+    var uri = this.api + "edit/${this.$route.params.id}";
     this.axios.get(uri).then(function (response) {
       _this.blogpost = response.data;
     });
@@ -1866,8 +1869,8 @@ __webpack_require__.r(__webpack_exports__);
     updatePost: function updatePost() {
       var _this2 = this;
 
-      var uri = "http://vuelaravelcrud.test/api/blogpost/update/".concat(this.$route.params.id);
-      this.axios.blogpost(uri, this.blogpost).then(function (response) {
+      var uri = this.api + "update/${this.$route.params.id}";
+      this.axios.post(uri, this.blogpost).then(function (response) {
         _this2.$router.push({
           name: 'blogposts'
         });
@@ -1980,17 +1983,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      blogposts: []
+      blogposts: [],
+      api: "http://localhost:8888/blog-home/api/"
     };
   },
   created: function created() {
     var _this = this;
 
-    var uri = 'http://vuelaravelcrud.test/api/blogposts';
+    var uri = this.api + "blogposts";
     this.axios.get(uri).then(function (response) {
       _this.blogposts = response.data.data;
     });
@@ -1999,7 +2002,7 @@ __webpack_require__.r(__webpack_exports__);
     deleteBlogPost: function deleteBlogPost(id) {
       var _this2 = this;
 
-      var uri = "http://vuelaravelcrud.test/api/blogpost/delete/".concat(id);
+      var uri = this.api + "delete/${id}";
       this.axios["delete"](uri).then(function (response) {
         _this2.blogposts.splice(_this2.blogposts.indexOf(id), 1);
       });
@@ -37384,6 +37387,7 @@ var render = function() {
             ])
           ])
         ]),
+        _vm._v(" "),
         _c("br"),
         _vm._v(" "),
         _vm._m(0)
@@ -37691,11 +37695,9 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", [_vm._v("ID")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Item Name")]),
+        _c("th", [_vm._v("Blog Title")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Item Price")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Actions")])
+        _c("th", [_vm._v("Blog Body")])
       ])
     ])
   },
