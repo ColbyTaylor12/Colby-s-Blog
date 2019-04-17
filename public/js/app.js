@@ -1793,11 +1793,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      post: {}
+      blogpost: {}
     };
   },
   methods: {
-    addPost: function addPost() {}
+    addBlogPost: function addBlogPost() {
+      var _this = this;
+
+      var uri = 'http://vuelaravelcrud.test/api/blogpost/create';
+      this.axios.post(uri, this.blogpost).then(function (response) {
+        _this.$router.push({
+          name: 'blogposts'
+        });
+      });
+    }
   }
 });
 
@@ -1826,8 +1835,45 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {}
+  data: function data() {
+    return {
+      blogpost: {}
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    var uri = "http://vuelaravelcrud.test/api/blogpost/edit/".concat(this.$route.params.id);
+    this.axios.get(uri).then(function (response) {
+      _this.blogpost = response.data;
+    });
+  },
+  methods: {
+    updatePost: function updatePost() {
+      var _this2 = this;
+
+      var uri = "http://vuelaravelcrud.test/api/blogpost/update/".concat(this.$route.params.id);
+      this.axios.blogpost(uri, this.blogpost).then(function (response) {
+        _this2.$router.push({
+          name: 'blogposts'
+        });
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -1917,8 +1963,48 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {}
+  data: function data() {
+    return {
+      blogposts: []
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    var uri = 'http://vuelaravelcrud.test/api/blogposts';
+    this.axios.get(uri).then(function (response) {
+      _this.blogposts = response.data.data;
+    });
+  },
+  methods: {
+    deleteBlogPost: function deleteBlogPost(id) {
+      var _this2 = this;
+
+      var uri = "http://vuelaravelcrud.test/api/blogpost/delete/".concat(id);
+      this.axios["delete"](uri).then(function (response) {
+        _this2.blogposts.splice(_this2.blogposts.indexOf(id), 1);
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -37234,7 +37320,7 @@ var render = function() {
         on: {
           submit: function($event) {
             $event.preventDefault()
-            return _vm.addPost($event)
+            return _vm.addBlogPost($event)
           }
         }
       },
@@ -37242,26 +37328,26 @@ var render = function() {
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-md-6" }, [
             _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("Post Title:")]),
+              _c("label", [_vm._v("BlogPost Title:")]),
               _vm._v(" "),
               _c("input", {
                 directives: [
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.post.title,
-                    expression: "post.title"
+                    value: _vm.blogpost.title,
+                    expression: "blogpost.title"
                   }
                 ],
                 staticClass: "form-control",
                 attrs: { type: "text" },
-                domProps: { value: _vm.post.title },
+                domProps: { value: _vm.blogpost.title },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.$set(_vm.post, "title", $event.target.value)
+                    _vm.$set(_vm.blogpost, "title", $event.target.value)
                   }
                 }
               })
@@ -37272,26 +37358,26 @@ var render = function() {
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-md-6" }, [
             _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("Post Body:")]),
+              _c("label", [_vm._v("BlogPost Body:")]),
               _vm._v(" "),
               _c("textarea", {
                 directives: [
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.post.body,
-                    expression: "post.body"
+                    value: _vm.blogpost.body,
+                    expression: "blogpost.body"
                   }
                 ],
                 staticClass: "form-control",
                 attrs: { rows: "5" },
-                domProps: { value: _vm.post.body },
+                domProps: { value: _vm.blogpost.body },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.$set(_vm.post, "body", $event.target.value)
+                    _vm.$set(_vm.blogpost, "body", $event.target.value)
                   }
                 }
               })
@@ -37336,23 +37422,93 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c("h1", [_vm._v("Edit Post")]),
+    _vm._v(" "),
+    _c(
+      "form",
+      {
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.updateBlogPost($event)
+          }
+        }
+      },
+      [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-6" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("BlogPost Title:")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.blogpost.title,
+                    expression: "blogpost.title"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text" },
+                domProps: { value: _vm.blogpost.title },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.blogpost, "title", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-6" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("BlogPost Body:")]),
+              _vm._v(" "),
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.blogpost.body,
+                    expression: "blogpost.body"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { rows: "5" },
+                domProps: { value: _vm.blogpost.body },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.blogpost, "body", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ])
+        ]),
+        _c("br"),
+        _vm._v(" "),
+        _vm._m(0)
+      ]
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "col-md-8" }, [
-        _c("div", { staticClass: "card card-default" }, [
-          _c("div", { staticClass: "card-header" }, [_vm._v("Edit Component")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _vm._v("\n                I'm an Edit component.\n            ")
-          ])
-        ])
-      ])
+    return _c("div", { staticClass: "form-group" }, [
+      _c("button", { staticClass: "btn btn-primary" }, [_vm._v("Update")])
     ])
   }
 ]
@@ -37467,25 +37623,102 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c("h1", [_vm._v("Posts")]),
+    _vm._v(" "),
+    _vm._m(0),
+    _c("br"),
+    _vm._v(" "),
+    _c("table", { staticClass: "table table-hover" }, [
+      _vm._m(1),
+      _vm._v(" "),
+      _c(
+        "tbody",
+        _vm._l(_vm.blogposts, function(blogpost) {
+          return _c("tr", { key: blogpost.id }, [
+            _c("td", [_vm._v(_vm._s(blogpost.id))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(blogpost.title))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(blogpost.body))]),
+            _vm._v(" "),
+            _vm._m(2, true),
+            _vm._v(" "),
+            _c("td", [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-danger",
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.deleteBlogPost(blogpost.id)
+                    }
+                  }
+                },
+                [_vm._v("Delete")]
+              )
+            ])
+          ])
+        }),
+        0
+      )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "col-md-8" }, [
-        _c("div", { staticClass: "card card-default" }, [
-          _c("div", { staticClass: "card-header" }, [
-            _vm._v("Index Component")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _vm._v("\n                I'm an Index component.\n            ")
-          ])
-        ])
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-10" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-2" }, [
+        _c(
+          "a",
+          { staticClass: "btn btn-primary", attrs: { href: "/blog-create" } },
+          [_vm._v("Create Post")]
+        )
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("ID")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Item Name")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Item Price")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Actions")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-primary",
+          attrs: {
+            href: "/blog-edit",
+            "params:": "",
+            "{": "",
+            "id:": "",
+            "post.id": "",
+            "}}": ""
+          }
+        },
+        [_vm._v("Edit")]
+      )
     ])
   }
 ]

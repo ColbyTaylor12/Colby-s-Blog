@@ -1,20 +1,56 @@
 <template>
-  <div class="row justify-content-center">
-      <div class="col-md-8">
-          <div class="card card-default">
-              <div class="card-header">Index Component</div>
-
-              <div class="card-body">
-                  I'm an Index component.
-              </div>
+  <div>
+      <h1>Posts</h1>
+        <div class="row">
+          <div class="col-md-10"></div>
+          <div class="col-md-2">
+            <a href="/blog-create" class="btn btn-primary">Create Post</a>
           </div>
-      </div>
+        </div><br />
+
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Item Name</th>
+                <th>Item Price</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr v-for="blogpost in blogposts" :key="blogpost.id">
+                    <td>{{ blogpost.id }}</td>
+                    <td>{{ blogpost.title }}</td>
+                    <td>{{ blogpost.body }}</td>
+                    <td><a href="/blog-edit" params: { id: post.id }} class="btn btn-primary">Edit</a></td>
+                    <td><button class="btn btn-danger" @click.prevent="deleteBlogPost(blogpost.id)">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
   </div>
 </template>
 
 <script>
-    export default {
-        mounted() {
+  export default {
+      data() {
+        return {
+          blogposts: []
         }
+      },
+      created() {
+      let uri = 'http://vuelaravelcrud.test/api/blogposts';
+      this.axios.get(uri).then(response => {
+        this.blogposts = response.data.data;
+      });
+    },
+    methods: {
+      deleteBlogPost(id)
+      {
+        let uri = `http://vuelaravelcrud.test/api/blogpost/delete/${id}`;
+        this.axios.delete(uri).then(response => {
+          this.blogposts.splice(this.blogposts.indexOf(id), 1);
+        });
+      }
     }
+  }
 </script>

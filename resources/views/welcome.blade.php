@@ -88,7 +88,7 @@
                 <!-- below here an anhcor tag to about section lower on page -->
                     <a href="">My Story</a> 
                     <a href="/projects">My Work</a>
-                    <a href="/blog">Blog</a>
+                    <a href="/blog-home">Blog</a>
                     <a href="https://stackoverflow.com/users/10973113/colby-taylor">Stack Overflow</a>
                     <a href="https://www.linkedin.com/in/colby-taylor-82551b17a/">LinkedIn</a>
                     <a href="https://github.com/ColbyTaylor12">GitHub</a>

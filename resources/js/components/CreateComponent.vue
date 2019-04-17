@@ -1,20 +1,20 @@
 <template>
  <div>
     <h1>Create A Post</h1>
-    <form @submit.prevent="addPost">
+    <form @submit.prevent="addBlogPost">
       <div class="row">
         <div class="col-md-6">
           <div class="form-group">
-            <label>Post Title:</label>
-            <input type="text" class="form-control" v-model="post.title">
+            <label>BlogPost Title:</label>
+            <input type="text" class="form-control" v-model="blogpost.title">
           </div>
         </div>
         </div>
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
-              <label>Post Body:</label>
-              <textarea class="form-control" v-model="post.body" rows="5"></textarea>
+              <label>BlogPost Body:</label>
+              <textarea class="form-control" v-model="blogpost.body" rows="5"></textarea>
             </div>
           </div>
         </div><br />
@@ -29,12 +29,15 @@
     export default {
         data(){
             return{
-                post:{},
+                blogpost:{},
             }
         },
         methods: {
-        addPost(){
-
+        addBlogPost(){
+          let uri = 'http://vuelaravelcrud.test/api/blogpost/create';
+    this.axios.post(uri, this.blogpost).then((response) => {
+       this.$router.push({name: 'blogposts'});
+    });
         },
         },
     }

@@ -8,13 +8,37 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+            html, body {
+                background-color: grey;
+                color: blue;
+                font-family: 'Nunito', sans-serif;
+                font-weight: 200;
+                height: 100vh;
+                margin: 0;
+            }
+
+            .content {
+                text-align: center;
+            }
+
+            .links > a {
+                color: blue;
+                padding: 0 25px;
+                font-size: 13px;
+                font-weight: 600;
+                letter-spacing: .1rem;
+                text-decoration: none;
+                text-transform: uppercase;
+            }
+        </style>
   </head>
   <body>
   <div id="app">
     <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/blog-home">My Blog</a></li>
-        <li><a href="/projects">My Projects</a></li>
+        <li><a href="/" style="color:black">Home</a></li>
+        <li><a href="/blog-home" style="color:black">My Blog</a></li>
+        <li><a href="/projects" style="color:black">My Projects</a></li>
     </ul>
   @yield('content')
   </div>    
